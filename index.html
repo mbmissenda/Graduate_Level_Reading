@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skim Smart, Read Deep | Reading Research in Integrative Health</title>
+<meta name="description" content="A practical guide for master's students on when to skim a research paper, when to read deeply and take notes, and how to move from reading into APA 7th edition citation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#10284a;
+  --navy-deep:#0a1c33;
+  --navy-soft:#1d3d66;
+  --navy-tint:#eef2f8;
+  --gold:#c8a339;
+  --gold-light:#e8d38a;
+  --gold-pale:#fbf5e6;
+  --gold-text:#7a5c08;
+  --teal:#1f6f61;
+  --teal-pale:#e9f4f1;
+  --rust:#9c3a24;
+  --rust-pale:#fbeeea;
+  --ink:#141b26;
+  --body:#333d4c;
+  --muted:#5e6979;
+  --line:#dce2ea;
+  --line-soft:#eaeef4;
+  --bg:#ffffff;
+  --bg-alt:#f6f8fb;
+  --radius:10px;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation-duration:.01ms !important;transition-duration:.01ms !important}
+}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--body);
+  font-family:var(--sans);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%}
+
+/* ---------- layout ---------- */
+.wrap{max-width:860px;margin:0 auto;padding:0 24px}
+main section{padding:52px 0;border-top:1px solid var(--line-soft)}
+main section:first-of-type{border-top:0}
+
+/* ---------- skip link ---------- */
+.skip{
+  position:absolute;left:-9999px;top:0;background:var(--gold);color:var(--navy-deep);
+  padding:12px 20px;font-weight:700;z-index:100;border-radius:0 0 var(--radius) 0;
+}
+.skip:focus{left:0}
+
+/* ---------- typography ---------- */
+h1,h2,h3{font-family:var(--serif);color:var(--navy);line-height:1.25;margin:0 0 .5em}
+h1{font-size:clamp(2.1rem,5.2vw,3.1rem);font-weight:700;letter-spacing:-.015em}
+h2{font-size:clamp(1.55rem,3.6vw,2.05rem);font-weight:700;letter-spacing:-.01em;margin-bottom:.35em}
+h3{font-size:1.2rem;font-weight:700;margin-top:1.9em}
+p,li,td,th,dd,blockquote,summary{overflow-wrap:break-word;word-break:break-word}
+p{margin:0 0 1.05em}
+a{color:var(--navy-soft);text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px}
+a:hover{color:var(--rust)}
+strong{color:var(--ink);font-weight:650}
+code,.mono{font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;font-size:.88em}
+.lede{font-size:1.16rem;line-height:1.62;color:var(--body)}
+.eyebrow{
+  font-size:.74rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--gold-text);margin:0 0 .9em;font-family:var(--sans);
+}
+.section-num{
+  display:inline-block;font-family:var(--sans);font-size:.72rem;font-weight:700;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--gold-text);
+  background:var(--gold-pale);border:1px solid var(--gold-light);
+  padding:4px 11px;border-radius:99px;margin-bottom:14px;
+}
+
+/* ---------- header ---------- */
+header.hero{
+  background:
+    radial-gradient(900px 420px at 88% -12%, rgba(200,163,57,.22), transparent 62%),
+    linear-gradient(160deg,var(--navy-deep) 0%,var(--navy) 55%,#16355f 100%);
+  color:#eaf0f8;padding:60px 0 56px;position:relative;overflow:hidden;
+}
+header.hero::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:5px;
+  background:linear-gradient(90deg,var(--gold) 0%,var(--gold-light) 50%,var(--gold) 100%);
+}
+header.hero h1{color:#fff;margin-bottom:.35em}
+header.hero .lede{color:#c9d7ea;max-width:62ch;font-size:1.18rem}
+.kicker{
+  font-size:.75rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold-light);margin:0 0 18px;
+}
+.hero-meta{
+  margin-top:30px;padding-top:20px;border-top:1px solid rgba(255,255,255,.16);
+  display:flex;flex-wrap:wrap;gap:10px 26px;font-size:.87rem;color:#a9bdd8;
+}
+.hero-meta span{display:inline-flex;align-items:center;gap:8px}
+.hero-meta .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex:none}
+
+/* ---------- toc ---------- */
+nav.toc{background:var(--bg-alt);border-bottom:1px solid var(--line);padding:20px 0}
+nav.toc ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+nav.toc a{
+  display:block;font-size:.83rem;font-weight:600;text-decoration:none;color:var(--navy-soft);
+  background:#fff;border:1px solid var(--line);border-radius:99px;padding:7px 14px;
+  transition:background .15s,border-color .15s,color .15s;
+}
+nav.toc a:hover{background:var(--navy);border-color:var(--navy);color:#fff}
+nav.toc .n{color:var(--gold-text);font-weight:700;margin-right:6px}
+nav.toc a:hover .n{color:var(--gold-light)}
+
+/* ---------- callouts ---------- */
+.callout{border-radius:var(--radius);padding:22px 24px;margin:26px 0;border:1px solid var(--line)}
+.callout p:last-child{margin-bottom:0}
+.callout h3{margin-top:0;display:flex;align-items:center;gap:9px;font-family:var(--sans);font-size:1.02rem;letter-spacing:.01em}
+.callout .tag{
+  font-size:.7rem;letter-spacing:.11em;text-transform:uppercase;font-weight:700;
+  padding:3px 9px;border-radius:4px;
+}
+.c-evidence{background:var(--navy-tint);border-color:#c8d5e8}
+.c-evidence .tag{background:var(--navy);color:#fff}
+.c-warn{background:var(--rust-pale);border-color:#eccdc4}
+.c-warn .tag{background:var(--rust);color:#fff}
+.c-warn h3{color:var(--rust)}
+.c-tip{background:var(--gold-pale);border-color:var(--gold-light)}
+.c-tip .tag{background:var(--gold-text);color:#fff}
+.c-tip h3{color:var(--gold-text)}
+.c-note{background:var(--teal-pale);border-color:#bcdcd4}
+.c-note .tag{background:var(--teal);color:#fff}
+.c-note h3{color:var(--teal)}
+
+blockquote.pull{
+  margin:30px 0;padding:6px 0 6px 26px;border-left:4px solid var(--gold);
+  font-family:var(--serif);font-size:1.22rem;line-height:1.5;color:var(--navy);font-style:italic;
+}
+blockquote.pull cite{
+  display:block;margin-top:12px;font-family:var(--sans);font-size:.85rem;
+  font-style:normal;color:var(--muted);letter-spacing:.01em;
+}
+
+/* ---------- gear cards ---------- */
+.gears{display:grid;gap:18px;margin:28px 0}
+@media(min-width:720px){.gears{grid-template-columns:repeat(3,1fr)}}
+.gear{
+  border:1px solid var(--line);border-radius:var(--radius);padding:20px;background:#fff;
+  border-top:5px solid var(--line);display:flex;flex-direction:column;
+}
+.gear.g1{border-top-color:var(--teal)}
+.gear.g2{border-top-color:var(--gold)}
+.gear.g3{border-top-color:var(--navy)}
+.gear .gname{font-family:var(--serif);font-size:1.16rem;font-weight:700;color:var(--navy);margin:0 0 4px}
+.gear .gtime{font-size:.78rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;margin:0 0 12px}
+.gear.g1 .gtime{color:var(--teal)}
+.gear.g2 .gtime{color:var(--gold-text)}
+.gear.g3 .gtime{color:var(--navy-soft)}
+.gear p{font-size:.93rem;margin-bottom:.8em}
+.gear ul{font-size:.9rem;margin:0;padding-left:18px}
+.gear li{margin-bottom:5px}
+.gear .out{
+  margin-top:auto;padding-top:14px;border-top:1px dashed var(--line);
+  font-size:.85rem;color:var(--muted);
+}
+.gear .out b{color:var(--ink);display:block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
+
+/* ---------- two column compare ---------- */
+.compare{display:grid;gap:18px;margin:26px 0}
+@media(min-width:720px){.compare{grid-template-columns:1fr 1fr}}
+.col{border-radius:var(--radius);padding:22px;border:1px solid var(--line)}
+.col.skim{background:var(--teal-pale);border-color:#bcdcd4}
+.col.deep{background:var(--rust-pale);border-color:#eccdc4}
+.col h3{margin-top:0;font-size:1.05rem;font-family:var(--serif);font-weight:700}
+.col.skim h3{color:var(--teal)}
+.col.deep h3{color:var(--rust)}
+.col ul{margin:0;padding-left:20px;font-size:.95rem}
+.col li{margin-bottom:9px}
+.col li::marker{color:var(--gold)}
+
+/* ---------- steps ---------- */
+ol.steps{list-style:none;counter-reset:s;margin:26px 0;padding:0}
+ol.steps>li{
+  counter-increment:s;position:relative;padding:0 0 22px 58px;
+  border-left:2px solid var(--line);margin-left:17px;
+}
+ol.steps>li:last-child{border-left-color:transparent;padding-bottom:0}
+ol.steps>li::before{
+  content:counter(s);position:absolute;left:-18px;top:-2px;width:34px;height:34px;
+  background:var(--navy);color:#fff;border-radius:50%;display:grid;place-items:center;
+  font-weight:700;font-size:.92rem;font-family:var(--sans);border:3px solid #fff;
+}
+ol.steps h3{margin:2px 0 6px;font-family:var(--serif);font-size:1.12rem;color:var(--navy)}
+ol.steps .dur{
+  display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--gold-text);background:var(--gold-pale);border:1px solid var(--gold-light);
+  padding:2px 8px;border-radius:4px;margin-left:8px;vertical-align:2px;
+}
+ol.steps p{font-size:.96rem;margin-bottom:.6em}
+
+/* ---------- tables ---------- */
+.tablewrap{overflow-x:auto;margin:24px 0;border:1px solid var(--line);border-radius:var(--radius)}
+table{border-collapse:collapse;width:100%;font-size:.93rem;min-width:520px}
+th,td{padding:12px 15px;text-align:left;border-bottom:1px solid var(--line-soft);vertical-align:top}
+thead th{background:var(--navy);color:#fff;font-family:var(--sans);font-weight:600;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:nth-child(even){background:var(--bg-alt)}
+td code{background:var(--navy-tint);padding:2px 5px;border-radius:3px;color:var(--navy)}
+
+/* ---------- APA sample ---------- */
+.apa{
+  background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);
+  border-radius:0 var(--radius) var(--radius) 0;padding:18px 20px;margin:16px 0;
+  font-family:var(--serif);font-size:1rem;line-height:1.75;
+}
+.apa .hang{padding-left:2.2em;text-indent:-2.2em;overflow-wrap:anywhere}
+.apa .lbl{
+  display:block;font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:8px;
+}
+.apa em{font-style:italic}
+.part{border-bottom:2px dotted var(--gold);padding-bottom:1px}
+
+/* ---------- details ---------- */
+details{border:1px solid var(--line);border-radius:var(--radius);margin:12px 0;background:#fff;overflow:hidden}
+details[open]{border-color:#c8d5e8}
+summary{
+  padding:15px 20px;cursor:pointer;font-weight:600;color:var(--navy);list-style:none;
+  display:flex;align-items:center;gap:12px;font-size:1rem;
+}
+summary::-webkit-details-marker{display:none}
+summary::before{
+  content:"+";flex:none;width:22px;height:22px;border-radius:50%;background:var(--navy-tint);
+  color:var(--navy);display:grid;place-items:center;font-weight:700;font-size:1.05rem;line-height:1;
+}
+details[open] summary::before{content:"\2013";background:var(--gold);color:var(--navy-deep)}
+summary:hover{background:var(--bg-alt)}
+summary:focus-visible{outline:3px solid var(--gold);outline-offset:-3px}
+.details-body{padding:0 20px 18px;border-top:1px solid var(--line-soft);padding-top:16px;font-size:.96rem}
+.details-body p:last-child,.details-body ul:last-child{margin-bottom:0}
+
+/* ---------- buttons ---------- */
+button{font-family:var(--sans);cursor:pointer}
+.btn{
+  background:var(--navy);color:#fff;border:2px solid var(--navy);border-radius:7px;
+  padding:11px 22px;font-size:.93rem;font-weight:600;transition:background .15s,color .15s;
+}
+.btn:hover{background:var(--navy-soft);border-color:var(--navy-soft)}
+.btn.ghost{background:#fff;color:var(--navy)}
+.btn.ghost:hover{background:var(--navy-tint)}
+button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{
+  outline:3px solid var(--gold);outline-offset:2px;
+}
+
+/* ---------- course toggle ---------- */
+.ctoggle{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.ctoggle button{
+  border:1px solid var(--line);background:#fff;color:var(--navy-soft);border-radius:99px;
+  padding:9px 18px;font-size:.87rem;font-weight:600;
+}
+.ctoggle button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.ctoggle button[aria-pressed="true"]::before{content:"\2713  ";color:var(--gold-light)}
+.course-ex{
+  border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:0 var(--radius) var(--radius) 0;
+  background:var(--bg-alt);padding:20px 22px;
+}
+.course-ex h3{margin-top:0;color:var(--navy);font-family:var(--sans);font-size:1.02rem}
+.course-ex p:last-child{margin-bottom:0}
+.course-ex .verdict{
+  display:inline-block;margin-top:10px;font-size:.8rem;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;padding:5px 12px;border-radius:5px;
+}
+.v-skim{background:var(--teal);color:#fff}
+.v-mid{background:var(--gold-text);color:#fff}
+.v-deep{background:var(--navy);color:#fff}
+[hidden]{display:none !important}
+
+/* ---------- decision tool ---------- */
+.tool{
+  border:2px solid var(--navy);border-radius:var(--radius);background:#fff;
+  padding:26px;margin:28px 0;box-shadow:0 2px 14px rgba(16,40,74,.07);
+}
+.tool>h3{margin-top:0;font-size:1.3rem}
+.tool .q{margin-bottom:22px}
+.tool .q:last-of-type{margin-bottom:8px}
+.tool .qtext{font-weight:650;color:var(--ink);margin:0 0 11px;font-size:.99rem}
+.tool .qtext .qn{color:var(--gold-text);font-weight:700;margin-right:6px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opts button{
+  text-align:left;border:1px solid var(--line);background:#fff;border-radius:7px;
+  padding:12px 15px;font-size:.93rem;color:var(--body);line-height:1.45;
+  transition:border-color .15s,background .15s;
+}
+.opts button:hover{border-color:var(--navy-soft);background:var(--bg-alt)}
+.opts button[aria-pressed="true"]{
+  border-color:var(--navy);background:var(--navy-tint);color:var(--ink);font-weight:600;
+  box-shadow:inset 3px 0 0 var(--gold);
+}
+.result{
+  margin-top:22px;padding:20px 22px;border-radius:var(--radius);border:1px solid var(--line);
+  background:var(--bg-alt);
+}
+.result h3{margin-top:0;font-size:1.15rem;font-family:var(--serif)}
+.result p:last-child{margin-bottom:0}
+.result.r1{background:var(--teal-pale);border-color:#bcdcd4}
+.result.r1 h3{color:var(--teal)}
+.result.r2{background:var(--gold-pale);border-color:var(--gold-light)}
+.result.r2 h3{color:var(--gold-text)}
+.result.r3{background:var(--navy-tint);border-color:#c8d5e8}
+.result.r3 h3{color:var(--navy)}
+.tool-actions{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+
+/* ---------- quiz ---------- */
+.quiz{border:1px solid var(--line);border-radius:var(--radius);padding:26px;background:#fff;margin:26px 0}
+.quiz fieldset{border:0;margin:0 0 26px;padding:0}
+.quiz legend{font-weight:650;color:var(--ink);padding:0;margin-bottom:11px;font-size:.99rem;line-height:1.5}
+.quiz legend .qn{color:var(--gold-text);font-weight:700;margin-right:6px}
+.quiz label{
+  display:flex;gap:11px;align-items:flex-start;padding:10px 13px;border:1px solid var(--line);
+  border-radius:7px;margin-bottom:7px;cursor:pointer;font-size:.93rem;line-height:1.45;
+  transition:border-color .15s,background .15s;
+}
+.quiz label:hover{border-color:var(--navy-soft);background:var(--bg-alt)}
+.quiz input[type=radio]{margin:4px 0 0;accent-color:var(--navy);flex:none;width:17px;height:17px}
+.quiz label.correct{background:var(--teal-pale);border-color:var(--teal)}
+.quiz label.wrong{background:var(--rust-pale);border-color:var(--rust)}
+.fb{
+  margin-top:9px;padding:12px 15px;border-radius:7px;font-size:.91rem;line-height:1.55;
+  background:var(--navy-tint);border-left:3px solid var(--navy);
+}
+.fb b{color:var(--navy)}
+.score{
+  margin-top:8px;padding:16px 20px;border-radius:var(--radius);background:var(--navy);color:#fff;
+  font-weight:600;font-size:1rem;
+}
+.score span{color:var(--gold-light)}
+
+/* ---------- checklist ---------- */
+.checklist{border:1px solid var(--line);border-radius:var(--radius);padding:24px 26px;background:#fff}
+.checklist h3{margin-top:0;color:var(--navy);font-family:var(--serif);font-size:1.12rem}
+.checklist ul{list-style:none;margin:0 0 18px;padding:0}
+.checklist li{
+  padding:8px 0 8px 32px;position:relative;font-size:.95rem;border-bottom:1px solid var(--line-soft);
+}
+.checklist li:last-child{border-bottom:0}
+.checklist li::before{
+  content:"";position:absolute;left:0;top:11px;width:17px;height:17px;
+  border:2px solid var(--gold);border-radius:3px;
+}
+.checklist .grp{
+  font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--gold-text);margin:20px 0 6px;
+}
+.checklist .grp:first-of-type{margin-top:0}
+
+/* ---------- notes template ---------- */
+.template{
+  background:var(--navy-deep);color:#d6e2f2;border-radius:var(--radius);padding:22px 24px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86rem;line-height:1.85;
+  overflow-x:auto;margin:20px 0;
+}
+.template .k{color:var(--gold-light);font-weight:600}
+.template .hint{color:#8ba3c4;font-style:italic}
+.template h3{color:#fff;font-family:var(--sans);margin:0 0 14px;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase}
+
+/* ---------- voices ---------- */
+.voices{display:grid;gap:12px;margin:20px 0}
+@media(min-width:660px){.voices{grid-template-columns:repeat(3,1fr)}}
+.voice{border:1px solid var(--line);border-radius:var(--radius);padding:16px;background:#fff;border-top:4px solid}
+.voice.v1{border-top-color:var(--rust)}
+.voice.v2{border-top-color:var(--gold)}
+.voice.v3{border-top-color:var(--teal)}
+.voice .mark{font-family:ui-monospace,Menlo,monospace;font-size:1.02rem;font-weight:700;display:block;margin-bottom:6px}
+.voice.v1 .mark{color:var(--rust)}
+.voice.v2 .mark{color:var(--gold-text)}
+.voice.v3 .mark{color:var(--teal)}
+.voice b{display:block;font-size:.92rem;color:var(--ink);margin-bottom:4px}
+.voice p{font-size:.87rem;margin:0;color:var(--muted)}
+
+/* ---------- references ---------- */
+.refs{background:var(--bg-alt);border:1px solid var(--line);border-radius:var(--radius);padding:24px 26px}
+.refs h3{margin-top:0}
+.refs p{padding-left:2.2em;text-indent:-2.2em;font-family:var(--serif);font-size:1rem;line-height:1.7;overflow-wrap:anywhere}
+.refs em{font-style:italic}
+
+/* ---------- footer ---------- */
+footer{background:var(--navy-deep);color:#9db3d0;padding:36px 0;margin-top:56px;font-size:.88rem}
+footer a{color:var(--gold-light)}
+footer p{margin:0 0 .6em}
+footer .lic{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.13);font-size:.82rem;color:#7d95b5}
+
+/* ---------- utility ---------- */
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 0}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- print ---------- */
+@media print{
+  body{font-size:11pt;color:#000}
+  header.hero{background:none;color:#000;padding:0 0 18px;border-bottom:3px solid #000}
+  header.hero h1,header.hero .lede,.kicker,.hero-meta{color:#000}
+  nav.toc,.toolbar,.tool-actions,.ctoggle,footer .lic,.btn{display:none !important}
+  .tool,.quiz{border:1px solid #666}
+  details{border:1px solid #999}
+  details .details-body{display:block !important}
+  .course-ex[hidden]{display:block !important}
+  main section{page-break-inside:avoid;padding:20px 0}
+  a{color:#000;text-decoration:none}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:.8em;color:#444}
+  .template{background:#fff;color:#000;border:1px solid #999}
+  .template .k{color:#000;font-weight:700}
+  thead th{background:#000 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to main content</a>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">Notre Dame of Maryland University &middot; Integrative Health Studies</p>
+    <h1>Skim Smart, Read&nbsp;Deep</h1>
+    <p class="lede">You cannot read everything the way you read a novel &mdash; and you were never supposed to. This guide shows you how to decide, before you start, how deeply a research paper needs to be read, how to skim it well, and how to turn what you find into properly cited writing.</p>
+    <div class="hero-meta">
+      <span><span class="dot" aria-hidden="true"></span>ISCI&#8209;630a &middot; Survey of Complementary Health Approaches</span>
+      <span><span class="dot" aria-hidden="true"></span>ISCI&#8209;631 &middot; Introduction to Complementary and Integrative Health</span>
+      <span><span class="dot" aria-hidden="true"></span>About 20 minutes</span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Contents">
+  <div class="wrap">
+    <h2 class="visually-hidden">On this page</h2>
+    <ol>
+      <li><a href="#why"><span class="n">1</span>Skimming isn't cheating</a></li>
+      <li><a href="#decide"><span class="n">2</span>Decide before you read</a></li>
+      <li><a href="#gears"><span class="n">3</span>Three gears of reading</a></li>
+      <li><a href="#when"><span class="n">4</span>When to go deep</a></li>
+      <li><a href="#how"><span class="n">5</span>How to skim</a></li>
+      <li><a href="#worked"><span class="n">6</span>Worked example</a></li>
+      <li><a href="#deep"><span class="n">7</span>Deep reading &amp; notes</a></li>
+      <li><a href="#apa"><span class="n">8</span>Notes to writing (APA 7)</a></li>
+      <li><a href="#check"><span class="n">9</span>Self-check</a></li>
+      <li><a href="#pocket"><span class="n">10</span>Pocket checklist</a></li>
+      <li><a href="#refs"><span class="n">11</span>References</a></li>
+    </ol>
+  </div>
+</nav>
+
+<main id="main">
+<div class="wrap">
+
+<!-- ============ 1 ============ -->
+<section id="why">
+  <span class="section-num">Section 1</span>
+  <h2>Skimming isn't cheating. It's what experienced readers do.</h2>
+
+  <p class="lede">Most new master's students arrive with one reading gear: start at the first word, end at the last, feel guilty about anything skipped. That strategy worked in undergraduate courses with a textbook. It collapses the first week you are handed five research articles, a systematic review, and a discussion post due Thursday.</p>
+
+  <p>Here is the part nobody says out loud: your professors do not read most papers straight through either. They read <strong>selectively and out of order</strong>, and they decide how much attention a paper deserves before they commit to it. That is a learned skill, not a personality trait &mdash; and it is one you are expected to build during this degree.</p>
+
+  <div class="callout c-evidence">
+    <h3><span class="tag">The evidence</span> What research on research-reading found</h3>
+    <p>Hubbard and Dunbar (2017) surveyed 260 undergraduates, postgraduates, postdoctoral researchers, and faculty about how they actually read scientific papers. Confidence and skill increased at every career stage &mdash; including between postdocs and faculty &mdash; and readers at different stages valued <em>different sections</em> of the same paper. Inexperienced readers found the methods and results sections hardest and, critically, <strong>undervalued the results section and the work of interpreting data critically</strong>. Experienced readers, by contrast, overwhelmingly recommended reading selectively within a paper rather than straight through.</p>
+    <p>The authors' conclusion is the reason this page exists: students need <strong>explicit, structured instruction</strong> in how to read the literature, not a vague instruction to "read the paper."</p>
+  </div>
+
+  <blockquote class="pull">
+    "These data highlight a need for structured support with reading scientific literature at multiple career stages, and for senior academics to be aware that junior colleagues may prioritise their reading differently."
+    <cite>Hubbard &amp; Dunbar, 2017, Abstract</cite>
+  </blockquote>
+
+  <p>So: skimming is not the lazy version of reading. It is a <em>distinct skill with its own technique</em>, and knowing when to use it is the difference between drowning in your reading list and running it.</p>
+
+  <div class="callout c-warn">
+    <h3><span class="tag">But</span> The honest limit</h3>
+    <p>Skimming is a triage and orientation tool. It is <strong>not</strong> a substitute for reading a paper you intend to lean on. The rest of this page is mostly about telling those two situations apart &mdash; because getting that judgment wrong is how students end up citing a study that does not say what they claimed it said.</p>
+  </div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section id="decide">
+  <span class="section-num">Section 2</span>
+  <h2>Decide before you read: purpose sets the depth</h2>
+
+  <p>The single highest-value habit you can build this semester takes about fifteen seconds. Before you open a PDF, answer one question:</p>
+
+  <blockquote class="pull">What am I going to do with this paper?</blockquote>
+
+  <p>Reading depth is not a property of the paper. It is a property of <em>your purpose</em>. The same twelve-page randomized trial might deserve three minutes of your attention or ninety, depending entirely on whether you are surveying a field or building an argument on top of it.</p>
+
+  <div class="tool" id="depthTool">
+    <h3>Skim or deep read? Work it out.</h3>
+    <p style="font-size:.95rem;color:var(--muted);margin-bottom:22px">Answer three questions about the paper in front of you.</p>
+
+    <div class="q" data-q="0">
+      <p class="qtext"><span class="qn">Q1</span>Why are you opening this paper right now?</p>
+      <div class="opts" role="group" aria-label="Question 1 options">
+        <button type="button" data-pts="0">I'm deciding whether it's even relevant to my topic</button>
+        <button type="button" data-pts="1">I need general background for a discussion post or to orient myself</button>
+        <button type="button" data-pts="2">It's assigned for close analysis, critique, or journal club</button>
+        <button type="button" data-pts="2">I'm building an argument in a paper and this may be part of it</button>
+      </div>
+    </div>
+
+    <div class="q" data-q="1">
+      <p class="qtext"><span class="qn">Q2</span>Will you cite it &mdash; and for what?</p>
+      <div class="opts" role="group" aria-label="Question 2 options">
+        <button type="button" data-pts="0">Probably not at all</button>
+        <button type="button" data-pts="1">Maybe, for broad context ("research on this is growing")</button>
+        <button type="button" data-pts="3">Yes, for a specific finding, number, or conclusion</button>
+      </div>
+    </div>
+
+    <div class="q" data-q="2">
+      <p class="qtext"><span class="qn">Q3</span>Does anything you'd write depend on <em>how</em> the study was done &mdash; the dose, the protocol, the sample, the comparison group?</p>
+      <div class="opts" role="group" aria-label="Question 3 options">
+        <button type="button" data-pts="0">No &mdash; I just need to know this area exists</button>
+        <button type="button" data-pts="2">Somewhat &mdash; I'd mention the population or design in passing</button>
+        <button type="button" data-pts="3">Yes &mdash; or it's a safety, dosing, or interaction claim</button>
+      </div>
+    </div>
+
+    <div id="toolResult" class="result" role="status" aria-live="polite">
+      <p style="margin:0;color:var(--muted);font-size:.93rem">Your recommendation will appear here once you've answered all three.</p>
+    </div>
+
+    <div class="tool-actions">
+      <button type="button" class="btn ghost" id="toolReset">Start over</button>
+    </div>
+  </div>
+
+  <h3>See it in your course</h3>
+  <p>Same principle, two courses. Pick yours.</p>
+
+  <div class="ctoggle" role="group" aria-label="Choose your course">
+    <button type="button" class="cbtn" data-course="630" aria-pressed="true">ISCI&#8209;630a</button>
+    <button type="button" class="cbtn" data-course="631" aria-pressed="false">ISCI&#8209;631</button>
+  </div>
+
+  <div class="course-ex" data-course-panel="630">
+    <h3>ISCI&#8209;630a &middot; Survey of Complementary Health Approaches</h3>
+    <p><em>Scenario:</em> This week you have readings spanning several categories of complementary approaches &mdash; a mind&ndash;body intervention, a natural product, and a whole medical system. Your discussion post asks you to compare how two of these traditions define and evaluate "evidence."</p>
+    <p>You are not making an evidentiary claim about whether any one intervention works. You need to understand each paper's <em>framing</em>: what the authors treat as a legitimate outcome, what they count as a control, how they describe the tradition. That lives in the abstract, the introduction, and the discussion.</p>
+    <span class="verdict v-skim">Working skim is enough &mdash; for most of them</span>
+    <p style="margin-top:12px"><strong>The exception:</strong> the moment you write a sentence like "this trial found a significant reduction in pain," you have crossed into citing a specific finding. Go back into that one paper and read the methods and results properly before that sentence leaves your draft.</p>
+  </div>
+
+  <div class="course-ex" data-course-panel="631" hidden>
+    <h3>ISCI&#8209;631 &middot; Introduction to Complementary and Integrative Health</h3>
+    <p><em>Scenario:</em> Nothing is assigned. You are asked to find sources that support your own work, so you run a database search and get back several dozen results. Nobody has vetted any of them for you.</p>
+    <p>This is where skimming stops being a time-saver and becomes the assignment itself. An assigned reading has already passed through your instructor&rsquo;s judgment. A search result has passed through nothing but a keyword match. The screening is now your job &mdash; and it is a graded skill, not a preliminary to the real work.</p>
+    <p>Triage-skim <em>everything</em>: two to four minutes per result, keep or discard, capture the citation for anything you keep. Expect to discard most of them. Then the handful that survive, and that your argument will actually rest on, earn a full deep read.</p>
+    <p style="margin-bottom:0"><span class="verdict v-skim">Gear 1 on all of them</span> <span class="verdict v-deep" style="margin-left:8px">Gear 3 on the few you cite</span></p>
+    <p style="margin-top:14px"><strong>Watch for:</strong> predatory journals, opinion pieces formatted to look like reviews, and studies whose population has nothing to do with the one you are writing about. A triage skim catches all three in under three minutes &mdash; which is precisely why it is worth doing on all forty.</p>
+  </div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section id="gears">
+  <span class="section-num">Section 3</span>
+  <h2>Three gears of reading</h2>
+
+  <p>Stop thinking of reading as on/off. Think of it as three gears you shift between deliberately. Every paper starts in first gear. Most stay there. A few earn third.</p>
+
+  <div class="gears">
+    <article class="gear g1">
+      <p class="gname">Gear 1 &middot; Triage Skim</p>
+      <p class="gtime">2&ndash;4 minutes</p>
+      <p><strong>Purpose:</strong> decide whether this paper deserves any more of your life.</p>
+      <ul>
+        <li>Title, journal, year</li>
+        <li>Abstract &mdash; conclusion first</li>
+        <li>Figure and table captions</li>
+        <li>Final paragraph of discussion</li>
+      </ul>
+      <p class="out"><b>Output</b>Keep or discard, plus one sentence in your reading log.</p>
+    </article>
+
+    <article class="gear g2">
+      <p class="gname">Gear 2 &middot; Working Skim</p>
+      <p class="gtime">10&ndash;20 minutes</p>
+      <p><strong>Purpose:</strong> understand what the paper claims and whether you can use it for context.</p>
+      <ul>
+        <li>Everything in Gear 1</li>
+        <li>Last paragraph of the introduction</li>
+        <li>Design, setting, and sample from methods</li>
+        <li>Topic sentences in results</li>
+        <li>Limitations paragraph</li>
+      </ul>
+      <p class="out"><b>Output</b>Three to five bullets and the full APA reference, captured now.</p>
+    </article>
+
+    <article class="gear g3">
+      <p class="gname">Gear 3 &middot; Deep Read</p>
+      <p class="gtime">45&ndash;90+ minutes</p>
+      <p><strong>Purpose:</strong> you will cite, critique, or build directly on this paper.</p>
+      <ul>
+        <li>Pass 1: Gear 2, to build the map</li>
+        <li>Pass 2: linear read, methods and results closely</li>
+        <li>Structured notes with page numbers</li>
+        <li>Your own critique written down</li>
+      </ul>
+      <p class="out"><b>Output</b>Completed note template you could write from a week later.</p>
+    </article>
+  </div>
+
+  <div class="callout c-tip">
+    <h3><span class="tag">Rule</span> Shift up, never assume</h3>
+    <p>You can always shift into a higher gear, and you often should. What you cannot do is write as if you deep-read a paper you only skimmed. If you notice mid-draft that your sentence needs more than your notes contain &mdash; that is the signal to go back into the paper, not to soften the sentence until your thin notes can support it.</p>
+  </div>
+</section>
+
+<!-- ============ 4 ============ -->
+<section id="when">
+  <span class="section-num">Section 4</span>
+  <h2>When a skim is enough &mdash; and when it absolutely isn't</h2>
+
+  <div class="compare">
+    <div class="col skim">
+      <h3>A skim is enough when&hellip;</h3>
+      <ul>
+        <li>You're screening search results for relevance.</li>
+        <li>You need orientation to a topic that's new to you.</li>
+        <li>The paper provides general background, not the evidence your argument rests on.</li>
+        <li>You're mapping a literature for a first-pass review and need breadth before depth.</li>
+        <li>It's a fact sheet, encyclopedia entry, or textbook chapter you're using to get your bearings.</li>
+        <li>You already know this literature and are checking whether this paper adds anything new.</li>
+        <li>You're checking whether a source is current, peer reviewed, and on topic before investing further.</li>
+      </ul>
+    </div>
+
+    <div class="col deep">
+      <h3>Go deep when&hellip;</h3>
+      <ul>
+        <li>You will cite a <strong>specific</strong> number, effect, or conclusion.</li>
+        <li>The paper is the evidentiary backbone of your argument.</li>
+        <li>It's a systematic review or meta-analysis you're relying on &mdash; you need the inclusion criteria and the risk-of-bias assessment, not just the forest plot's bottom line.</li>
+        <li>The findings surprise you or contradict your other sources.</li>
+        <li>It's assigned for critique, close analysis, or journal club.</li>
+        <li>The design is unfamiliar and you can't yet judge its strength.</li>
+        <li><strong>The claim involves safety, contraindications, interactions, or dosing.</strong> Never skim a safety claim.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout c-note">
+    <h3><span class="tag">Integrative health</span> Why our field raises the bar</h3>
+    <p>In complementary and integrative health research, <strong>the methods often <em>are</em> the finding.</strong> "Ginger reduced nausea" means very little until you know the species, the plant part, the extraction method, the standardization, the dose, and the duration. "Acupuncture was effective" depends entirely on the points used, the number of sessions, the practitioner's training, and what the sham control actually involved. "Mindfulness improved outcomes" is unreadable without knowing the program, its length, and the adherence rate.</p>
+    <p>Conventional pharmacological trials let you skim a methods section and still roughly trust the headline. Ours frequently do not. When the intervention is complex, heterogeneous, or poorly standardized, <strong>a skim of the abstract will mislead you</strong> &mdash; and you will write a sentence you cannot defend. Treat intervention characterization as a deep-read trigger in its own right.</p>
+  </div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section id="how">
+  <span class="section-num">Section 5</span>
+  <h2>How to skim: the reading path</h2>
+
+  <p>A skim is not "reading fast." It is <strong>reading in a different order</strong>, targeting the places where papers concentrate their meaning. Papers are built to a predictable template, which means the good stuff is always in the same few locations. Here is the path.</p>
+
+  <ol class="steps">
+    <li>
+      <h3>Title, journal, year<span class="dur">15 sec</span></h3>
+      <p>What is being claimed, about whom? Is this primary research or a review? Is the journal peer reviewed? Is it recent enough for your topic &mdash; and if it's older, is it a landmark or just out of date?</p>
+    </li>
+    <li>
+      <h3>The abstract &mdash; read it backwards<span class="dur">60 sec</span></h3>
+      <p>Read the <em>conclusion</em> sentence first, then the results, then the methods sentence, then the background last. You'll know within seconds whether the paper is relevant, and reading in this order keeps you from getting absorbed by a persuasive introduction to a study that doesn't fit your needs.</p>
+      <p>Ask: <strong>What did they measure, in whom, compared to what?</strong> If the abstract can't tell you, that's information too.</p>
+    </li>
+    <li>
+      <h3>The last paragraph of the introduction<span class="dur">30 sec</span></h3>
+      <p>Almost universally, this is where the purpose statement, research question, or hypothesis lives. Skip the preceding four paragraphs of background &mdash; you can come back if you need them.</p>
+    </li>
+    <li>
+      <h3>Figures, tables, and their captions<span class="dur">2&ndash;3 min</span></h3>
+      <p>This is the highest-yield target on the page, and it is the one inexperienced readers most often skip. Captions are written to stand alone. A results table will tell you the sample size, the comparison, the effect, and the confidence interval faster than three pages of prose.</p>
+      <p>Hubbard and Dunbar (2017) found that experienced researchers rank figures and results as the most important part of a paper, while less experienced readers gravitate to the abstract and discussion &mdash; the two sections where authors are most free to put a favorable spin on what they found. <strong>Training yourself to look at the figures first is one of the fastest ways to read more like an expert.</strong></p>
+    </li>
+    <li>
+      <h3>First and last sentence of each results paragraph<span class="dur">2 min</span></h3>
+      <p>Results paragraphs are almost always topic-sentence-first. You can reconstruct the findings from openers alone, then drop into full reading only where something matters to you.</p>
+    </li>
+    <li>
+      <h3>The limitations paragraph<span class="dur">60 sec</span></h3>
+      <p>Near the end of the discussion, the authors tell you where their own work is weak. Read it. It's free critique, it tells you what the paper <em>cannot</em> support, and it will keep you from overstating the study in your own writing.</p>
+    </li>
+  </ol>
+
+  <div class="callout c-tip">
+    <h3><span class="tag">Exit test</span> Three questions before you close the tab</h3>
+    <p>If you can't answer these out loud, your skim didn't work &mdash; go back to the figures:</p>
+    <p><strong>1.</strong> Who did they study? &nbsp;&middot;&nbsp; <strong>2.</strong> What did they do to them, and compared to what? &nbsp;&middot;&nbsp; <strong>3.</strong> What did they find, and how confident should I be?</p>
+  </div>
+
+  <h3>Techniques that make skimming actually work</h3>
+
+  <details>
+    <summary>Skimming a qualitative paper: the targets move</summary>
+    <div class="details-body">
+      <p>The path holds, but stops 4 and 5 change. A quantitative paper concentrates its meaning in the results table &mdash; the sample size, the comparator, the effect, the confidence interval. A qualitative paper concentrates it in the <strong>analytic structure</strong>: the sampling and setting, the named method (Interpretative Phenomenological Analysis, grounded theory, thematic analysis), and the theme table, code tree, or framework diagram.</p>
+      <p>So the figure to hunt for is the one showing how the data were organized, and the question to ask of the results is not "is this significant?" but <strong>"do the quoted data actually support the theme the authors named?"</strong> Section 6 walks through exactly this on a real course reading.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Use Find (Ctrl+F / Cmd+F) as a reading instrument, not just a lookup</summary>
+    <div class="details-body">
+      <p>Search deliberately for the terms that carry meaning: your own key concept, the intervention name, <code>limitation</code>, <code>significant</code>, <code>adverse</code>, <code>adherence</code>, <code>dropout</code>, <code>funded</code>. Each hit drops you into a sentence that's usually worth reading in full. This turns a 20-page PDF into six short reads.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Read the abstract twice instead of the whole paper once</summary>
+    <div class="details-body">
+      <p>When you're genuinely short on time, two careful passes through an abstract &mdash; one for the claim, one for the method and the numbers &mdash; leaves you better informed than one distracted pass through the full text where you retain nothing past page four. Be honest about which situation you're in.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Set a timer. Seriously.</summary>
+    <div class="details-body">
+      <p>A skim without a time box quietly becomes a full read, and then you've spent forty minutes on a paper you were only screening. Four minutes for a triage skim, twenty for a working skim. When the timer goes, decide: discard, shift up a gear, or move on.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Keep one reading log, not notes scattered across fourteen PDFs</summary>
+    <div class="details-body">
+      <p>One document, one row or short entry per paper: full citation, gear used, one-sentence takeaway, and whether you might cite it. Five minutes a week of upkeep saves you the experience &mdash; and every graduate student has this experience &mdash; of knowing you read the perfect quote somewhere and being unable to find it two weeks later.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Capture the citation the moment you decide to keep a paper</summary>
+    <div class="details-body">
+      <p>Not later. Later is when DOIs go missing and you end up reconstructing a reference from a half-remembered title. Copy the full reference, formatted, into your log the second the paper survives triage. This is a thirty-second habit that prevents hours of reference-list reconstruction at 11pm the night before a deadline.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============ 6 ============ -->
+<section id="worked">
+  <span class="section-num">Section 6</span>
+  <h2>Worked example: skimming a real ISCI&#8209;630a reading</h2>
+
+  <p class="lede">Technique makes more sense applied than described. Here is the six-stop path from Section 5 run on an actual course reading &mdash; a qualitative study of why patients in Budapest turn to Traditional Chinese Medicine. Follow along with the paper open.</p>
+
+  <div class="apa">
+    <span class="lbl">The paper</span>
+    <p class="hang" style="margin:0">Z&ouml;rg&#337;, S., Purebl, G., &amp; Zana, &Aacute;. (2018). A qualitative study of culturally embedded factors in complementary and alternative medicine use. <em>BMC Complementary and Alternative Medicine, 18</em>(1), Article 25. https://doi.org/10.1186/s12906-018-2093-0</p>
+  </div>
+
+  <ol class="steps">
+    <li>
+      <h3>Title, journal, year<span class="dur">15 sec</span></h3>
+      <p>Peer reviewed, open access, 2018. And the most useful word is sitting in the title: <strong>qualitative</strong>. That is an instruction. Do not come to this paper looking for effect sizes, <em>p</em>-values, or percentages &mdash; it is not built to produce them, and a reader who skims it hunting for numbers will close it convinced it said nothing.</p>
+    </li>
+    <li>
+      <h3>Abstract, read backwards<span class="dur">60 sec</span></h3>
+      <p><strong>Conclusions first:</strong> a person&rsquo;s culturally shaped explanatory model runs through the entire patient journey; firsthand experience &mdash; their own or someone else&rsquo;s &mdash; is the most trusted source of information about illness and therapy; and trust, built and lost, is a determining factor in decisions about both CAM and biomedicine.</p>
+      <p><strong>Then results:</strong> rather than sorting reasons into the usual "push" and "pull" factors, the authors organized everything along milestones of the patient journey.</p>
+      <p><strong>Then methods:</strong> medical anthropological fieldwork, January 2015 to May 2017, at four Traditional Chinese Medicine clinics in Budapest; 105 patients observed; in-depth interviews with 9 patients and 9 practitioners; Interpretative Phenomenological Analysis.</p>
+      <p>You can now answer all three exit questions, and you are one minute in.</p>
+    </li>
+    <li>
+      <h3>Last paragraph of the introduction<span class="dur">30 sec</span></h3>
+      <p>It closes by proposing "a panoply of CAM use factors based on the trajectory of various patient journeys with special attention to psycho-social and cultural context" (Z&ouml;rg&#337; et al., 2018, Background section). There is your purpose statement. You just skipped roughly three pages on how hard CAM is to define and categorize &mdash; genuinely interesting, and entirely skippable unless definition <em>is</em> your topic.</p>
+    </li>
+    <li>
+      <h3>Figures and captions<span class="dur">2&ndash;3 min</span></h3>
+      <p>There is exactly one figure, and it is the whole paper. Figure 1 is the integrated code tree: biomedical diagnosis, biomedical consultations, biomedical treatment, philosophical congruence, and alternate "entr&eacute;es" &mdash; each branching into sub-codes such as <em>no cure</em>, <em>cure ineffective</em>, <em>side-effects</em>, <em>loss of trust</em>, <em>preference for the "natural,"</em> <em>anti-drug disposition</em>, <em>preference for the "ancient,"</em> <em>preference for holism</em>, <em>curiosity</em>, <em>prevention</em>, and <em>addiction</em>.</p>
+      <p>In a qualitative paper the coding structure <em>is</em> the results architecture. Ninety seconds with that figure hands you the entire finding, already organized, before you have read a line of the results. <strong>If you read nothing else in this paper, read Figure 1.</strong></p>
+    </li>
+    <li>
+      <h3>Topic sentences in the results<span class="dur">2 min</span></h3>
+      <p>The results headings mirror the figure, so you already hold the map. Skim the opening sentence of each subsection and drop into full reading only where it bears on your argument. The illustrative quotations from patients are italicized throughout, which makes them easy to locate &mdash; and if you intend to claim this paper found something, check that the quoted material genuinely supports it rather than merely sitting near it.</p>
+    </li>
+    <li>
+      <h3>The limitations paragraph<span class="dur">60 sec</span></h3>
+      <p><strong>There isn&rsquo;t one.</strong> Look for it and you will not find it; the discussion runs into the conclusions with no section telling you where this work is weak.</p>
+      <p>That is not a failed skim. That is a finding <em>about the paper</em>, and it changes what you owe your reader. The authors have not scoped their own claims, so you must. One city, one modality, nine patient interviews, and every participant recruited inside clinics they had already chosen to attend &mdash; which means this study can tell you a great deal about how those patients reason, and nothing whatsoever about people who considered TCM and decided against it.</p>
+    </li>
+  </ol>
+
+  <h3>What this skim does and doesn&rsquo;t let you write</h3>
+  <p>Here is the judgment the whole page has been building toward. A skim of this quality supports some sentences and not others, and the line between them is not about effort &mdash; it is about what the study design can carry.</p>
+
+  <div class="compare">
+    <div class="col skim">
+      <h3>You can write&hellip;</h3>
+      <ul>
+        <li>That decisions about complementary medicine are shaped by culturally embedded explanatory models rather than by evidence alone (Z&ouml;rg&#337; et al., 2018).</li>
+        <li>That in this fieldwork, patients frequently turned to TCM after biomedical treatment failed, offered no cure, or produced side effects they found unbearable.</li>
+        <li>That trust &mdash; and its loss &mdash; in the physician&ndash;patient relationship operated as a determining factor in therapy choice.</li>
+        <li>That firsthand experience, one&rsquo;s own or another person&rsquo;s, outranked institutional authority as a source of credibility for these patients.</li>
+      </ul>
+    </div>
+    <div class="col deep">
+      <h3>You cannot write&hellip;</h3>
+      <ul>
+        <li>Any claim about <strong>how many</strong> CAM users think this way. Qualitative fieldwork does not measure prevalence, and was never trying to.</li>
+        <li>Any generalization to <strong>U.S. patients</strong>, or to modalities other than TCM.</li>
+        <li>Anything about whether TCM <strong>works</strong>. This study never asked.</li>
+        <li>A percentage, an effect, or a statistic of any kind &mdash; including the participant counts, which describe who was there, not a sample estimate.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout c-warn">
+    <h3><span class="tag">The habit</span> Name the study&rsquo;s reach before you cite it</h3>
+    <p>Most source misuse at the master&rsquo;s level is not invention. It is quietly stretching a study past what its design can carry &mdash; turning nine interviews in Budapest into "research shows that patients prefer&hellip;" Before any sentence citing this paper goes into your draft, finish this sentence out loud: <strong>"This study can tell me ______, and it cannot tell me ______."</strong> If you cannot fill in both blanks, you have skimmed the paper but you do not yet understand it.</p>
+  </div>
+</section>
+
+<!-- ============ 7 ============ -->
+<section id="deep">
+  <span class="section-num">Section 7</span>
+  <h2>Deep reading and note-taking</h2>
+
+  <p>A deep read isn't a slower skim &mdash; it's a different activity with a different goal. You're no longer asking "what does this say?" You're asking <strong>"should I believe it, and what exactly can I claim on its basis?"</strong></p>
+
+  <h3>The two-pass structure</h3>
+
+  <p><strong>Pass 1 &mdash; Orientation (15 minutes).</strong> Run a working skim, exactly as in Section 5. You're building a map: what the question was, what they did, what they found, where the weak points are. Don't take detailed notes yet. Resist it.</p>
+
+  <p><strong>Pass 2 &mdash; Interrogation (30&ndash;60 minutes).</strong> Now read linearly, with the note template open beside you. Because you already have the map, you'll read the methods and results with an agenda instead of passively absorbing them. You'll notice what's <em>missing</em>, which is usually where the interesting critique lives.</p>
+
+  <div class="template">
+    <h3>Reading note template &mdash; copy this</h3>
+    <span class="k">Full APA reference:</span> <span class="hint">write it now, complete, with DOI</span><br>
+    <span class="k">Gear used:</span> <span class="hint">1 / 2 / 3 &mdash; and the date you read it</span><br><br>
+    <span class="k">Research question / purpose:</span><br>
+    <span class="k">Design &amp; setting:</span> <span class="hint">RCT? cohort? qualitative? where, when</span><br>
+    <span class="k">Participants:</span> <span class="hint">N, who they were, inclusion/exclusion, who was left out</span><br>
+    <span class="k">Intervention / exposure:</span> <span class="hint">be ruthlessly specific &mdash; preparation, dose, frequency, duration, who delivered it</span><br>
+    <span class="k">Comparator:</span> <span class="hint">usual care? sham? waitlist? nothing?</span><br>
+    <span class="k">Outcomes &amp; measures:</span> <span class="hint">what instrument, at what timepoints</span><br><br>
+    <span class="k">Key findings (my words):</span> <span class="hint">with page / table number for each</span><br>
+    <span class="k">Quotable lines:</span> <span class="hint">exact words, in quotation marks, with page number</span><br>
+    <span class="k">Limitations:</span> <span class="hint">theirs, then yours</span><br>
+    <span class="k">Funding / conflicts:</span><br><br>
+    <span class="k">How this connects:</span> <span class="hint">to my argument, or to another source</span><br>
+    <span class="k">One-sentence takeaway:</span>
+  </div>
+
+  <h3>Keep three voices separate &mdash; this is the plagiarism firewall</h3>
+
+  <p>Most accidental plagiarism at the master's level is not dishonesty. It's a note-taking failure: three weeks later, you can no longer tell which lines in your notes were the author's words, which were the author's ideas, and which were yours. Mark them as you write, every time.</p>
+
+  <div class="voices">
+    <div class="voice v1">
+      <span class="mark">"&nbsp;&nbsp;"</span>
+      <b>Their exact words</b>
+      <p>Always in quotation marks, always with a page or paragraph number. If it isn't marked here, you can never quote it safely.</p>
+    </div>
+    <div class="voice v2">
+      <span class="mark">plain text</span>
+      <b>Their idea, your words</b>
+      <p>A paraphrase. Still needs a citation &mdash; borrowed ideas require attribution just as borrowed language does.</p>
+    </div>
+    <div class="voice v3">
+      <span class="mark">[[ &nbsp; ]]</span>
+      <b>Your own thinking</b>
+      <p>Your reaction, critique, connection, doubt. No citation needed &mdash; and this is the material that becomes your actual analysis.</p>
+    </div>
+  </div>
+
+  <div class="callout c-tip">
+    <h3><span class="tag">Try it</span> Write the takeaway with the paper closed</h3>
+    <p>Before you finish a deep read, close the PDF and write your one-sentence takeaway from memory. If you can't, you didn't understand it yet &mdash; you recognized it. Recognition feels exactly like comprehension right up until the moment you have to write something.</p>
+  </div>
+</section>
+
+<!-- ============ 8 ============ -->
+<section id="apa">
+  <span class="section-num">Section 8</span>
+  <h2>From notes to writing: citing in APA 7th edition</h2>
+
+  <p>Your reading only counts once it shows up, accurately attributed, in your writing. This section covers the bridge.</p>
+
+  <div class="callout c-warn">
+    <h3><span class="tag">Integrity</span> Cite at the depth you actually read</h3>
+    <p>This is the rule that connects everything above to everything below.</p>
+    <p><strong>Never cite a specific statistic, effect size, or nuanced conclusion that you only saw in an abstract.</strong> Abstracts are the most optimistic paragraph in any paper. The results section is where the truth lives, complete with the confidence intervals, the subgroup where it didn't work, and the outcome that wasn't significant.</p>
+    <p><strong>Never cite a source you haven't opened.</strong> If you found it cited in another paper, either go read the original or use a secondary citation &mdash; <span class="mono">(Smith, 1998, as cited in Jones, 2020)</span>, with only Jones in your reference list. APA discourages this, so use it only when the original is genuinely unavailable.</p>
+    <p><strong>If you can't find it in the paper, you can't write it.</strong> A sentence you can't point to a page for is a sentence that doesn't belong in your draft.</p>
+  </div>
+
+  <h3>Paraphrasing well: three moves</h3>
+  <p><strong>Close the source.</strong> Then write what it means <em>for your argument</em>, in your own sentence structure. <strong>Reopen and check.</strong> If three or more consecutive words match the original, either rewrite it or quote it properly. Swapping synonyms into the author's sentence frame is still plagiarism &mdash; the structure is theirs too.</p>
+  <p>A good paraphrase is usually <em>shorter</em> than the original and points somewhere. If yours is the same length, you're transcribing, not thinking.</p>
+
+  <h3>The same finding, three ways</h3>
+  <p>All three are correct. Which you choose depends on whether the emphasis belongs on the finding or on the researchers.</p>
+
+  <div class="apa">
+    <span class="lbl">Parenthetical &mdash; emphasis on the finding</span>
+    <p style="margin:0">Reading strategies become more selective and less linear as researchers gain experience <span class="part">(Hubbard &amp; Dunbar, 2017)</span>.</p>
+  </div>
+
+  <div class="apa">
+    <span class="lbl">Narrative &mdash; emphasis on the researchers</span>
+    <p style="margin:0"><span class="part">Hubbard and Dunbar (2017)</span> found that readers at different career stages valued different sections of the same research paper.</p>
+  </div>
+
+  <div class="apa">
+    <span class="lbl">With methodological detail &mdash; strongest for a graduate argument</span>
+    <p style="margin:0">In a survey of 260 undergraduates and researchers in the biological sciences, skill in reading the results section developed slowly across an entire academic career <span class="part">(Hubbard &amp; Dunbar, 2017)</span>.</p>
+  </div>
+
+  <div class="apa">
+    <span class="lbl">Direct quotation, source with no page numbers</span>
+    <p style="margin:0">The authors call for "structured support with reading scientific literature at multiple career stages" <span class="part">(Hubbard &amp; Dunbar, 2017, Abstract)</span>.</p>
+  </div>
+
+  <h3>In-text citation quick reference</h3>
+
+  <div class="tablewrap">
+    <table>
+      <caption class="visually-hidden">APA 7th edition in-text citation formats by author type</caption>
+      <thead>
+        <tr><th scope="col">Source type</th><th scope="col">Parenthetical</th><th scope="col">Narrative</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>One author</td><td><code>(Hubbard, 2017)</code></td><td>Hubbard (2017)</td></tr>
+        <tr><td>Two authors</td><td><code>(Hubbard &amp; Dunbar, 2017)</code></td><td>Hubbard and Dunbar (2017)</td></tr>
+        <tr><td><strong>Three or more authors</strong></td><td><code>(Lie et al., 2016)</code></td><td>Lie et al. (2016)</td></tr>
+        <tr><td>Group author, first use</td><td><code>(National Center for Complementary and Integrative Health [NCCIH], 2021)</code></td><td>The National Center for Complementary and Integrative Health (NCCIH, 2021)</td></tr>
+        <tr><td>Group author, after</td><td><code>(NCCIH, 2021)</code></td><td>NCCIH (2021)</td></tr>
+        <tr><td>Direct quote, paginated</td><td><code>(Hubbard &amp; Dunbar, 2017, p. 12)</code></td><td>Hubbard and Dunbar (2017) wrote that&hellip; (p. 12)</td></tr>
+        <tr><td>Direct quote, no pages</td><td><code>(NCCIH, 2021, What's in a Name section)</code></td><td>NCCIH (2021) explained&hellip; (para. 3)</td></tr>
+        <tr><td>No date</td><td><code>(Author, n.d.)</code></td><td>Author (n.d.)</td></tr>
+        <tr><td>Two sources at once</td><td><code>(Hubbard &amp; Dunbar, 2017; Lie et al., 2016)</code></td><td>&mdash; alphabetical, semicolon-separated</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout c-note">
+    <h3><span class="tag">Changed in APA 7</span> Three things students get wrong from habit</h3>
+    <p><strong>Three or more authors use <span class="mono">et al.</span> from the very first citation.</strong> APA 6's rule of listing all authors the first time is gone.</p>
+    <p><strong>"Retrieved from" is no longer used</strong> before a URL, unless the content is designed to change over time and has no archived version.</p>
+    <p><strong>The publisher location is gone</strong> from book references. No more "New York, NY:".</p>
+  </div>
+
+  <h3>Quotation mechanics</h3>
+  <p><strong>Fewer than 40 words:</strong> run it into your sentence inside double quotation marks, with author, year, and page. <strong>Forty words or more:</strong> block quotation &mdash; start a new line, indent the whole block half an inch, no quotation marks, double-spaced, and the citation goes in parentheses <em>after</em> the closing punctuation.</p>
+  <p>At the master's level, quote sparingly. Quote when the author's exact phrasing is itself the point &mdash; a definition, a contested term, a claim you're about to take apart. Otherwise paraphrase, because paraphrasing shows you understood it and quoting only shows you found it.</p>
+
+  <h3>Reference list entries</h3>
+  <p>New page, the word <strong>References</strong> centered and bold, double-spaced throughout, hanging indent of half an inch, alphabetical by first author's surname. Article and book titles in <em>sentence case</em>; journal names in <em>Title Case</em> and italicized along with the volume number &mdash; but not the issue number.</p>
+
+  <div class="apa">
+    <span class="lbl">Journal article with a DOI</span>
+    <p class="hang" style="margin:0">Hubbard, K. E., &amp; Dunbar, S. D. (2017). Perceptions of scientific research literature and strategies for reading papers depend on academic career stage. <em>PLOS ONE, 12</em>(12), Article e0189753. https://doi.org/10.1371/journal.pone.0189753</p>
+  </div>
+
+  <div class="apa">
+    <span class="lbl">Web page with a group author</span>
+    <p class="hang" style="margin:0">National Center for Complementary and Integrative Health. (2021, April). <em>Complementary, alternative, or integrative health: What's in a name?</em> U.S. Department of Health and Human Services. https://www.nccih.nih.gov/health/complementary-alternative-or-integrative-health-whats-in-a-name</p>
+  </div>
+
+  <div class="apa">
+    <span class="lbl">Chapter in an edited book &mdash; pattern</span>
+    <p class="hang" style="margin:0">Author, A. A. (Year). Title of the chapter in sentence case. In E. E. Editor &amp; F. F. Editor (Eds.), <em>Title of the book in sentence case</em> (2nd ed., pp. 145&ndash;167). Publisher. https://doi.org/xxxx</p>
+  </div>
+
+  <details>
+    <summary>More reference rules you'll actually need</summary>
+    <div class="details-body">
+      <p><strong>Authors:</strong> list up to 20. With 21 or more, give the first 19, then an ellipsis, then the final author's name &mdash; no ampersand before it.</p>
+      <p><strong>DOIs:</strong> always format as a live link beginning <code>https://doi.org/</code>. Don't write "doi:" or "DOI:". If an article has a DOI, include it even when you read the print version.</p>
+      <p><strong>No DOI, from a database:</strong> if the article has no DOI and you found it through a library database, no URL is needed &mdash; end the reference after the page range.</p>
+      <p><strong>Article numbers:</strong> when a journal uses article numbers instead of page ranges (common in open-access journals like PLOS ONE), write <code>Article e0189753</code> where the page numbers would go.</p>
+      <p><strong>Secondary sources:</strong> only the source you actually read goes in the reference list.</p>
+      <p><strong>Personal communications:</strong> interviews, emails, and class lectures are cited in text only &mdash; never in the reference list.</p>
+      <p><strong>Student papers:</strong> no running head is required. Check your assignment instructions, which override the manual.</p>
+    </div>
+  </details>
+
+  <div class="callout c-tip">
+    <h3><span class="tag">Tool warning</span> Citation generators and AI both get this wrong</h3>
+    <p>Reference managers routinely mangle capitalization, drop DOIs, invent issue numbers, and misformat group authors. Generative AI tools will produce references that look flawless and do not exist. <strong>Check every reference against the actual source record before you submit</strong> &mdash; this is now part of the skill, not an optional extra. The thirty seconds you spend verifying is the difference between a polished paper and one that quietly falls apart under scrutiny.</p>
+  </div>
+</section>
+
+<!-- ============ 9 ============ -->
+<section id="check">
+  <span class="section-num">Section 9</span>
+  <h2>Self-check</h2>
+  <p>Five questions. Answer them, then check &mdash; the feedback is where the learning is.</p>
+
+  <form class="quiz" id="quiz">
+    <fieldset>
+      <legend><span class="qn">Q1</span>You're screening fifteen search results to decide which four to actually use for your literature review. What gear?</legend>
+      <label><input type="radio" name="q1" value="a"><span>Gear 3 &mdash; deep read all fifteen, because thoroughness matters</span></label>
+      <label><input type="radio" name="q1" value="b" data-correct="true"><span>Gear 1 &mdash; triage skim each one, then shift up for the survivors</span></label>
+      <label><input type="radio" name="q1" value="c"><span>Gear 2 &mdash; working skim all fifteen equally</span></label>
+      <div class="fb" hidden data-fb><b>Gear 1.</b> Triage is exactly what screening means: two to four minutes each to answer "is this relevant?" Spending equal attention on all fifteen is how a literature search eats a whole weekend. Shift up only for the ones that survive.</div>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="qn">Q2</span>You skimmed a trial's abstract and want to write: "Participants receiving the intervention showed a 32% reduction in symptom severity." What do you do?</legend>
+      <label><input type="radio" name="q2" value="a"><span>Write it &mdash; the number came straight from the abstract, so it's accurate</span></label>
+      <label><input type="radio" name="q2" value="b" data-correct="true"><span>Go back into the results and methods and verify the figure, the population, and the timepoint before writing the sentence</span></label>
+      <label><input type="radio" name="q2" value="c"><span>Soften it to "showed a reduction in symptoms" and cite the abstract</span></label>
+      <div class="fb" hidden data-fb><b>Verify first.</b> A specific number is a deep-read claim, full stop. Abstracts routinely report the most favorable outcome, at the most favorable timepoint, in the subgroup where it worked. Option C is the more tempting trap: vaguening a sentence so your thin notes can carry it leaves you writing something you still haven't verified.</div>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="qn">Q3</span>Which part of a research paper do inexperienced readers most often skip &mdash; and experienced researchers rate as most important?</legend>
+      <label><input type="radio" name="q3" value="a"><span>The introduction's literature review</span></label>
+      <label><input type="radio" name="q3" value="b"><span>The acknowledgements and funding statement</span></label>
+      <label><input type="radio" name="q3" value="c" data-correct="true"><span>The results section, including the figures and tables</span></label>
+      <div class="fb" hidden data-fb><b>Results, figures, and tables.</b> Hubbard and Dunbar (2017) found that less experienced readers gravitate toward the abstract and discussion &mdash; the sections where authors interpret &mdash; while experienced researchers go to the data. Making figures your first stop rather than your last is one of the fastest upgrades available to you.</div>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="qn">Q4</span>Your source is a study of an herbal preparation, and your paper will recommend it for a specific population. Which detail makes a deep read non-negotiable?</legend>
+      <label><input type="radio" name="q4" value="a"><span>The journal's impact factor</span></label>
+      <label><input type="radio" name="q4" value="b" data-correct="true"><span>The species, plant part, extraction method, standardization, and dose &mdash; and any safety or interaction data</span></label>
+      <label><input type="radio" name="q4" value="c"><span>The number of citations the paper has received</span></label>
+      <div class="fb" hidden data-fb><b>The intervention characterization &mdash; and the safety data.</b> In integrative health, the methods frequently <em>are</em> the finding. "Turmeric helped" is not a usable claim without knowing which preparation, at what dose, for how long. And safety, dosing, and interaction claims are never, under any circumstances, skim material.</div>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="qn">Q5</span>Three weeks after reading, you find a striking sentence in your notes and can't remember whether you wrote it or the author did. What went wrong?</legend>
+      <label><input type="radio" name="q5" value="a"><span>You read too fast</span></label>
+      <label><input type="radio" name="q5" value="b"><span>Nothing &mdash; just cite the author to be safe</span></label>
+      <label><input type="radio" name="q5" value="c" data-correct="true"><span>You didn't mark the three voices &mdash; exact words, paraphrase, and your own thinking &mdash; as you took notes</span></label>
+      <div class="fb" hidden data-fb><b>The three voices weren't marked.</b> This is the most common route to accidental plagiarism at the master's level, and it's entirely preventable with a marking convention you apply every time. Option B fails in both directions: citing the author for your own insight gives away your analysis, and if the words <em>were</em> theirs, an uncited paraphrase of a direct quote is still a problem.</div>
+    </fieldset>
+
+    <div class="toolbar">
+      <button type="button" class="btn" id="quizCheck">Check my answers</button>
+      <button type="button" class="btn ghost" id="quizReset">Reset</button>
+    </div>
+    <div id="quizScore" class="score" hidden role="status" aria-live="polite"></div>
+  </form>
+</section>
+
+<!-- ============ 10 ============ -->
+<section id="pocket">
+  <span class="section-num">Section 10</span>
+  <h2>Pocket checklist</h2>
+  <p>Print this, or keep it open in a tab while you work.</p>
+
+  <div class="checklist">
+    <p class="grp">Before opening the paper</p>
+    <ul>
+      <li>What am I going to <em>do</em> with this paper?</li>
+      <li>Will I cite it &mdash; and for a specific claim, or for general context?</li>
+      <li>Gear chosen and timer set.</li>
+    </ul>
+
+    <p class="grp">While skimming</p>
+    <ul>
+      <li>Title, journal, year &mdash; primary research or review?</li>
+      <li>Abstract read backwards: conclusion, results, methods.</li>
+      <li>Last paragraph of the introduction for the purpose statement.</li>
+      <li>Every figure and table caption.</li>
+      <li>Topic sentences in results.</li>
+      <li>Limitations paragraph.</li>
+    </ul>
+
+    <p class="grp">Before closing the tab</p>
+    <ul>
+      <li>I can say who was studied, what was done, and what was found.</li>
+      <li>Full APA reference captured in my reading log, with DOI.</li>
+      <li>One-sentence takeaway written down.</li>
+      <li>Decision recorded: discard, keep for context, or deep read.</li>
+    </ul>
+
+    <p class="grp">Deep read triggers &mdash; any one of these means shift to Gear 3</p>
+    <ul>
+      <li>I'm citing a specific number, effect, or conclusion.</li>
+      <li>My argument depends on this paper.</li>
+      <li>It's a safety, dosing, interaction, or contraindication claim.</li>
+      <li>The intervention is complex or poorly standardized.</li>
+      <li>The findings contradict my other sources, or surprise me.</li>
+      <li>It's assigned for critique or journal club.</li>
+    </ul>
+
+    <p class="grp">Before the sentence goes in my draft</p>
+    <ul>
+      <li>I read the part of the paper this claim comes from &mdash; not just the abstract.</li>
+      <li>My notes mark exact words, paraphrase, and my own thinking separately.</li>
+      <li>Paraphrase checked: no runs of three or more identical words.</li>
+      <li>In-text citation matches a reference list entry, and vice versa.</li>
+      <li>I can say what this study <em>can</em> tell me and what it cannot.</li>
+      <li>Every reference verified against the actual source record.</li>
+    </ul>
+  </div>
+
+  <div class="toolbar">
+    <button type="button" class="btn" id="printBtn">Print this page</button>
+    <button type="button" class="btn ghost" id="expandBtn">Expand all sections</button>
+  </div>
+</section>
+
+<!-- ============ 11 ============ -->
+<section id="refs">
+  <span class="section-num">Section 11</span>
+  <h2>References</h2>
+
+  <div class="refs">
+    <h3 style="font-size:1.05rem;margin-bottom:16px">Cited on this page</h3>
+    <p>American Psychological Association. (2020). <em>Publication manual of the American Psychological Association</em> (7th ed.). https://doi.org/10.1037/0000165-000</p>
+    <p>Hubbard, K. E., &amp; Dunbar, S. D. (2017). Perceptions of scientific research literature and strategies for reading papers depend on academic career stage. <em>PLOS ONE, 12</em>(12), Article e0189753. https://doi.org/10.1371/journal.pone.0189753</p>
+    <p>National Center for Complementary and Integrative Health. (2021, April). <em>Complementary, alternative, or integrative health: What's in a name?</em> U.S. Department of Health and Human Services. https://www.nccih.nih.gov/health/complementary-alternative-or-integrative-health-whats-in-a-name</p>
+
+    <p>Z&ouml;rg&#337;, S., Purebl, G., &amp; Zana, &Aacute;. (2018). A qualitative study of culturally embedded factors in complementary and alternative medicine use. <em>BMC Complementary and Alternative Medicine, 18</em>(1), Article 25. https://doi.org/10.1186/s12906-018-2093-0</p>
+
+    <h3 style="font-size:1.05rem;margin:26px 0 16px">If you want to go further</h3>
+    <p>Lie, R., Abdullah, C., He, W., &amp; Tour, E. (2016). Perceived challenges in primary literature in a master's class: Effects of experience and instruction. <em>CBE&mdash;Life Sciences Education, 15</em>(4), Article ar77. https://doi.org/10.1187/cbe.15-09-0198</p>
+  </div>
+
+  <div class="callout c-note" style="margin-top:26px">
+    <h3><span class="tag">Practice</span> Read the source that made this page</h3>
+    <p>Hubbard and Dunbar (2017) is open access. Try this: give it a four-minute triage skim using the path in Section 5, write your one-sentence takeaway, and then compare it to how this page described the study. You'll learn more about skimming from doing it once on a real paper than from reading three more guides about it.</p>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong style="color:#e8d38a">Skim Smart, Read Deep</strong> &mdash; a reading-strategy resource for ISCI&#8209;630a and ISCI&#8209;631.</p>
+    <p>Integrative Health Studies &middot; Notre Dame of Maryland University</p>
+    <p class="lic">Questions about how deeply to read something for this course? Ask in the course discussion board &mdash; it's a better question than most students think to ask.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- decision tool ---------- */
+  var tool = document.getElementById('depthTool');
+  if (tool) {
+    var answers = [null, null, null];
+    var qBlocks = tool.querySelectorAll('.q');
+    var resultBox = document.getElementById('toolResult');
+
+    var verdicts = [
+      { cls:'r1', title:'Gear 1 — Triage Skim (2–4 minutes)',
+        body:'You are screening, not studying. Read the title, the abstract backwards, the figure captions, and the last paragraph of the discussion. Then decide: discard it, or shift up. Record the full citation only if you keep it.' },
+      { cls:'r2', title:'Gear 2 — Working Skim (10–20 minutes)',
+        body:'You need to understand what this paper claims, but your argument will not rest on it. Add the last paragraph of the introduction, the design and sample from the methods, the topic sentences in the results, and the limitations paragraph. Capture the full APA reference now, and write three to five bullets you could use later.' },
+      { cls:'r3', title:'Gear 3 — Deep Read (two passes, 45–90+ minutes)',
+        body:'This paper is load-bearing. Start with a working skim to build the map, then read linearly with the note template from Section 7 open beside you. Get page numbers for anything you might quote, write down the limitations in your own words, and record your own critique separately from the authors’ claims.' }
+    ];
+
+    qBlocks.forEach(function(block){
+      var idx = parseInt(block.getAttribute('data-q'), 10);
+      var btns = block.querySelectorAll('.opts button');
+      btns.forEach(function(btn){
+        btn.setAttribute('aria-pressed', 'false');
+        btn.addEventListener('click', function(){
+          btns.forEach(function(b){ b.setAttribute('aria-pressed','false'); });
+          btn.setAttribute('aria-pressed','true');
+          answers[idx] = parseInt(btn.getAttribute('data-pts'), 10);
+          render();
+        });
+      });
+    });
+
+    function render(){
+      if (answers.indexOf(null) !== -1) return;
+      var total = answers[0] + answers[1] + answers[2];
+      var v = total <= 2 ? verdicts[0] : (total <= 5 ? verdicts[1] : verdicts[2]);
+      resultBox.className = 'result ' + v.cls;
+      resultBox.innerHTML = '<h3>' + v.title + '</h3><p>' + v.body + '</p>';
+    }
+
+    document.getElementById('toolReset').addEventListener('click', function(){
+      answers = [null, null, null];
+      tool.querySelectorAll('.opts button').forEach(function(b){ b.setAttribute('aria-pressed','false'); });
+      resultBox.className = 'result';
+      resultBox.innerHTML = '<p style="margin:0;color:var(--muted);font-size:.93rem">Your recommendation will appear here once you’ve answered all three.</p>';
+    });
+  }
+
+  /* ---------- course toggle ---------- */
+  var cbtns = document.querySelectorAll('.cbtn');
+  cbtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var course = btn.getAttribute('data-course');
+      cbtns.forEach(function(b){ b.setAttribute('aria-pressed', String(b === btn)); });
+      document.querySelectorAll('[data-course-panel]').forEach(function(p){
+        p.hidden = (p.getAttribute('data-course-panel') !== course);
+      });
+    });
+  });
+
+  /* ---------- quiz ---------- */
+  var quiz = document.getElementById('quiz');
+  if (quiz) {
+    var scoreBox = document.getElementById('quizScore');
+
+    document.getElementById('quizCheck').addEventListener('click', function(){
+      var sets = quiz.querySelectorAll('fieldset');
+      var correct = 0, answered = 0;
+
+      sets.forEach(function(fs){
+        var labels = fs.querySelectorAll('label');
+        var fb = fs.querySelector('[data-fb]');
+        var picked = fs.querySelector('input:checked');
+        if (picked) answered++;
+
+        labels.forEach(function(l){
+          var input = l.querySelector('input');
+          l.classList.remove('correct','wrong');
+          if (input.dataset.correct === 'true') l.classList.add('correct');
+          if (input.checked && input.dataset.correct !== 'true') l.classList.add('wrong');
+        });
+
+        if (picked && picked.dataset.correct === 'true') correct++;
+        fb.hidden = false;
+      });
+
+      scoreBox.hidden = false;
+      var msg;
+      if (answered < sets.length) {
+        msg = 'You answered ' + answered + ' of ' + sets.length + '. <span>' + correct + ' correct</span> — the answers are marked in green above, and the explanations are worth reading either way.';
+      } else if (correct === sets.length) {
+        msg = '<span>' + correct + ' out of ' + sets.length + '.</span> All correct — you have the judgment this page is trying to teach. Now go use it on this week’s reading list.';
+      } else {
+        msg = '<span>' + correct + ' out of ' + sets.length + '.</span> Read the explanations under the ones you missed — that is where the actual skill is.';
+      }
+      scoreBox.innerHTML = msg;
+      scoreBox.scrollIntoView({ block: 'nearest' });
+    });
+
+    document.getElementById('quizReset').addEventListener('click', function(){
+      quiz.reset();
+      quiz.querySelectorAll('label').forEach(function(l){ l.classList.remove('correct','wrong'); });
+      quiz.querySelectorAll('[data-fb]').forEach(function(f){ f.hidden = true; });
+      scoreBox.hidden = true;
+    });
+  }
+
+  /* ---------- print & expand ---------- */
+  var printBtn = document.getElementById('printBtn');
+  if (printBtn) printBtn.addEventListener('click', function(){ window.print(); });
+
+  var expandBtn = document.getElementById('expandBtn');
+  if (expandBtn) {
+    expandBtn.addEventListener('click', function(){
+      var all = document.querySelectorAll('details');
+      var anyClosed = Array.prototype.some.call(all, function(d){ return !d.open; });
+      all.forEach(function(d){ d.open = anyClosed; });
+      expandBtn.textContent = anyClosed ? 'Collapse all sections' : 'Expand all sections';
+    });
+  }
+
+  window.addEventListener('beforeprint', function(){
+    document.querySelectorAll('details').forEach(function(d){ d.open = true; });
+  });
+})();
+</script>
+
+</body>
+</html>
