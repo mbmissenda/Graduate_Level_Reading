@@ -403,12 +403,42 @@ footer .lic{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,2
 .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 0}
 .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
+/* ---------- feedback widget ---------- */
+.feedback{padding:44px 0;border-top:1px solid var(--line-soft)}
+.fbk-card{background:var(--navy-tint);border:1px solid #c8d5e8;border-radius:var(--radius);padding:30px 24px;text-align:center}
+.fbk-title{font-size:1.45rem;margin:0 0 6px}
+.fbk-sub{font-size:.9rem;color:var(--muted);margin:0 auto 20px;max-width:52ch}
+.fbk-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:440px;margin:0 auto}
+.fbk-btn{
+  padding:13px 6px;border-radius:8px;border:2px solid var(--navy);background:#fff;color:var(--navy);
+  font-weight:650;font-size:.98rem;transition:background .15s,color .15s;
+}
+.fbk-btn:hover{background:var(--navy);color:#fff}
+.fbk-btn:disabled{opacity:.55;cursor:wait}
+.fbk-done{outline:none}
+.fbk-thanks{font-family:var(--serif);font-size:1.18rem;color:var(--navy);font-weight:700;margin:0 0 16px}
+.fbk-more{text-align:left;max-width:560px;margin:0 auto}
+.fbk-more label{display:block;font-weight:600;color:var(--ink);font-size:.93rem;margin-bottom:7px}
+.fbk-more label span{font-weight:400;color:var(--muted)}
+.fbk-more textarea{
+  width:100%;font-family:var(--sans);font-size:.95rem;line-height:1.5;padding:10px 12px;
+  border:1px solid #6b7a90;border-radius:7px;resize:vertical;margin-bottom:10px;background:#fff;color:var(--ink);
+}
+.fbk-more textarea:focus-visible{outline:3px solid var(--gold);outline-offset:1px}
+.fbk-status{font-size:.88rem;color:var(--muted);margin:12px 0 0;min-height:1.3em}
+.fbk-status.err{color:var(--rust);font-weight:600}
+@media(max-width:420px){
+  .fbk-card{padding:26px 16px}
+  .fbk-choices{gap:8px}
+  .fbk-btn{font-size:.92rem;padding:12px 2px}
+}
+
 /* ---------- print ---------- */
 @media print{
   body{font-size:11pt;color:#000}
   header.hero{background:none;color:#000;padding:0 0 18px;border-bottom:3px solid #000}
   header.hero h1,header.hero .lede,.kicker,.hero-meta{color:#000}
-  nav.toc,.toolbar,.tool-actions,.ctoggle,footer .lic,.btn{display:none !important}
+  nav.toc,.toolbar,.tool-actions,.ctoggle,footer .lic,.btn,.feedback{display:none !important}
   .tool,.quiz{border:1px solid #666}
   details{border:1px solid #999}
   details .details-body{display:block !important}
@@ -1109,6 +1139,31 @@ footer .lic{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,2
   </div>
 </section>
 
+<!-- ============ feedback ============ -->
+<aside class="feedback" id="feedback" aria-labelledby="fbkTitle">
+  <div class="fbk-card">
+    <h2 class="fbk-title" id="fbkTitle">Was this page useful?</h2>
+    <p class="fbk-sub">One click. Anonymous &mdash; this page doesn&rsquo;t record your name, email, or anything that identifies you.</p>
+
+    <div class="fbk-choices" id="fbkChoices" role="group" aria-labelledby="fbkTitle">
+      <button type="button" class="fbk-btn" data-value="Yes">Yes</button>
+      <button type="button" class="fbk-btn" data-value="Somewhat">Somewhat</button>
+      <button type="button" class="fbk-btn" data-value="No">No</button>
+    </div>
+
+    <div class="fbk-done" id="fbkDone" tabindex="-1" hidden>
+      <p class="fbk-thanks" id="fbkThanks">Thank you &mdash; that helps me improve this page.</p>
+      <div class="fbk-more" id="fbkMore">
+        <label for="fbkComment">Anything you&rsquo;d change or add? <span>(optional &mdash; please don&rsquo;t include your name)</span></label>
+        <textarea id="fbkComment" rows="3" maxlength="1000"></textarea>
+        <button type="button" class="btn" id="fbkSend">Send comment</button>
+      </div>
+    </div>
+
+    <p class="fbk-status" id="fbkStatus" role="status" aria-live="polite"></p>
+  </div>
+</aside>
+
 <!-- ============ 11 ============ -->
 <section id="refs">
   <span class="section-num">Section 11</span>
@@ -1268,6 +1323,155 @@ footer .lic{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,2
 
   window.addEventListener('beforeprint', function(){
     document.querySelectorAll('details').forEach(function(d){ d.open = true; });
+  });
+})();
+</script>
+
+<script>
+/* =====================================================================
+   FEEDBACK SETTINGS  — the only part you need to edit.
+   Paste your Google Form's pre-filled link between the quotes below.
+   Setup steps are in the README under "Collecting feedback".
+   ===================================================================== */
+var FEEDBACK_PREFILL_LINK = 'PASTE_YOUR_GOOGLE_FORM_PREFILLED_LINK_HERE';
+
+/* Change this whenever you revise the page. It is saved with every
+   response so you can compare feedback before and after a revision,
+   and it lets students who already answered rate the new version. */
+var PAGE_VERSION = '2026-09';
+/* ===================================================================== */
+
+(function(){
+  "use strict";
+
+  /* ---------- read the Google Form pre-filled link ---------- */
+  function parsePrefill(link){
+    try {
+      var u = new URL(link);
+      var m = u.pathname.match(/\/forms\/d\/e\/([^\/]+)/);
+      if (!m) return null;
+      var fields = {};
+      u.searchParams.forEach(function(v, k){
+        if (k.indexOf('entry.') !== 0) return;
+        var val = String(v).trim().toUpperCase();
+        if (val === 'YES' || val === 'SOMEWHAT' || val === 'NO') fields.rating = k;
+        else if (val === 'COURSE') fields.course = k;
+        else if (val === 'COMMENT') fields.comment = k;
+        else if (val === 'PAGE') fields.page = k;
+      });
+      if (!fields.rating) return null;
+      return { action: 'https://docs.google.com/forms/d/e/' + m[1] + '/formResponse', fields: fields };
+    } catch (e) { return null; }
+  }
+  var cfg = parsePrefill(FEEDBACK_PREFILL_LINK);
+
+  /* ---------- course, from ?course= in the link you post ---------- */
+  var courseLabel = 'unspecified';
+  try {
+    var raw = new URLSearchParams(window.location.search).get('course');
+    if (raw) {
+      var digits = (raw.match(/\d{3}/) || [''])[0];
+      var btn = digits && document.querySelector('.cbtn[data-course="' + digits + '"]');
+      if (btn) {
+        courseLabel = btn.textContent.replace(/\u2011/g, '-').trim();
+        btn.click();               /* open that course's scenario by default */
+      } else {
+        courseLabel = raw.replace(/[^A-Za-z0-9-]/g, '').slice(0, 24) || 'unspecified';
+      }
+    }
+  } catch (e) {}
+
+  /* ---------- elements ---------- */
+  var choices = document.getElementById('fbkChoices');
+  if (!choices) return;
+  var buttons = choices.querySelectorAll('.fbk-btn');
+  var done = document.getElementById('fbkDone');
+  var thanks = document.getElementById('fbkThanks');
+  var more = document.getElementById('fbkMore');
+  var comment = document.getElementById('fbkComment');
+  var sendBtn = document.getElementById('fbkSend');
+  var status = document.getElementById('fbkStatus');
+
+  /* no comment question in the form? then no comment box on the page */
+  if (cfg && !cfg.fields.comment) more.hidden = true;
+
+  /* ---------- remember who already answered (this browser only) ---------- */
+  var KEY = 'ssrd-feedback:' + PAGE_VERSION;
+  function load(){ try { return JSON.parse(localStorage.getItem(KEY)) || null; } catch (e) { return null; } }
+  function save(v){ if (!cfg) return; try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) {} }
+  var state = load();
+
+  function setStatus(msg, isErr){
+    status.textContent = msg || '';
+    status.className = 'fbk-status' + (isErr ? ' err' : '');
+  }
+
+  /* ---------- send to Google Forms ---------- */
+  function send(payload){
+    if (!cfg) {
+      console.warn('[feedback] Not set up yet: paste your Google Form pre-filled link into FEEDBACK_PREFILL_LINK. Nothing was recorded.', payload);
+      return Promise.resolve('unconfigured');
+    }
+    var body = new URLSearchParams();
+    if (payload.rating) body.append(cfg.fields.rating, payload.rating);
+    if (cfg.fields.course) body.append(cfg.fields.course, courseLabel);
+    if (cfg.fields.page) body.append(cfg.fields.page, PAGE_VERSION);
+    if (payload.comment && cfg.fields.comment) body.append(cfg.fields.comment, payload.comment);
+    return fetch(cfg.action, { method: 'POST', mode: 'no-cors', body: body, keepalive: true })
+      .then(function(){ return 'sent'; });
+  }
+
+  function showDone(rating, returning){
+    choices.hidden = true;
+    done.hidden = false;
+    thanks.textContent = returning
+      ? 'You already rated this page \u201c' + rating + '\u201d \u2014 thank you.'
+      : 'Thank you \u2014 that helps me improve this page.';
+    if (state && state.commented) more.hidden = true;
+  }
+
+  if (state && state.rating) showDone(state.rating, true);
+
+  /* ---------- click 1: the rating ---------- */
+  buttons.forEach(function(b){
+    b.addEventListener('click', function(){
+      var rating = b.getAttribute('data-value');
+      buttons.forEach(function(x){ x.disabled = true; });
+      setStatus('Sending\u2026');
+      send({ rating: rating }).then(function(){
+        state = { rating: rating, commented: false };
+        save(state);
+        setStatus('');
+        showDone(rating, false);
+        done.focus();
+      }).catch(function(){
+        buttons.forEach(function(x){ x.disabled = false; });
+        setStatus('That didn\u2019t send \u2014 please check your connection and try again.', true);
+      });
+    });
+  });
+
+  /* ---------- optional: the comment ----------
+     Sent as its own row with the rating left blank, so it never
+     double-counts in the chart. The rating is kept in brackets at
+     the start of the comment so you can read it in context. */
+  sendBtn.addEventListener('click', function(){
+    var text = comment.value.trim();
+    if (!text) { setStatus('Type a comment first \u2014 or skip it. Your rating is already recorded.'); comment.focus(); return; }
+    var rating = (state && state.rating) || 'no rating';
+    sendBtn.disabled = true;
+    setStatus('Sending\u2026');
+    send({ comment: '[' + rating + '] ' + text }).then(function(){
+      state = { rating: rating, commented: true };
+      save(state);
+      more.hidden = true;
+      thanks.textContent = 'Comment received \u2014 thank you.';
+      setStatus('');
+      done.focus();
+    }).catch(function(){
+      sendBtn.disabled = false;
+      setStatus('That didn\u2019t send \u2014 please check your connection and try again.', true);
+    });
   });
 })();
 </script>
