@@ -1331,9 +1331,13 @@ footer .lic{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,2
 /* =====================================================================
    FEEDBACK SETTINGS  — the only part you need to edit.
    Paste your Google Form's pre-filled link between the quotes below.
+   KEEP the single quotes and the semicolon. Replace only the words
+   PASTE_YOUR_GOOGLE_FORM_PREFILLED_LINK_HERE. When you're done it
+   should look like this (your link will be longer):
+     var FEEDBACK_PREFILL_LINK = 'https://docs.google.com/forms/d/e/1FAIpQL.../viewform?usp=pp_url&entry.123=Yes&entry.456=COURSE';
    Setup steps are in the README under "Collecting feedback".
    ===================================================================== */
-var FEEDBACK_PREFILL_LINK = 'https://docs.google.com/forms/d/e/1FAIpQLSfA1D7jHvwTc5gTDxipaNVDUDIbeU9I2wGLqqqoEwwM9auhfQ/viewform?usp=pp_url&entry.1827385749=Yes&entry.542375249=COURSE&entry.650189791=COMMENT&entry.1627071475=PAGE';
+var FEEDBACK_PREFILL_LINK = 'PASTE_YOUR_GOOGLE_FORM_PREFILLED_LINK_HERE';
 
 /* Change this whenever you revise the page. It is saved with every
    response so you can compare feedback before and after a revision,
@@ -1397,6 +1401,23 @@ var PAGE_VERSION = '2026-09';
 
   /* ---------- remember who already answered (this browser only) ---------- */
   var KEY = 'ssrd-feedback:' + PAGE_VERSION;
+
+  /* Instructor testing: add ?feedback=reset to the address to forget
+     this browser's answer and show the buttons again. */
+  try {
+    var qs = new URLSearchParams(window.location.search);
+    if (qs.get('feedback') === 'reset') {
+      try {
+        Object.keys(localStorage).forEach(function(k){
+          if (k.indexOf('ssrd-feedback:') === 0) localStorage.removeItem(k);
+        });
+      } catch (e) {}
+      qs.delete('feedback');
+      var clean = window.location.pathname + (qs.toString() ? '?' + qs.toString() : '') + window.location.hash;
+      if (window.history && history.replaceState) history.replaceState(null, '', clean);
+    }
+  } catch (e) {}
+
   function load(){ try { return JSON.parse(localStorage.getItem(KEY)) || null; } catch (e) { return null; } }
   function save(v){ if (!cfg) return; try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) {} }
   var state = load();
